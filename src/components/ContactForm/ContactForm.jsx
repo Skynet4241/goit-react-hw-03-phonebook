@@ -4,6 +4,7 @@ import {
   ContactFormInput,
   ContactFormBtn,
 } from './ContactForm.styled';
+import propTypes from 'prop-types';
 
 export const ContactForm = ({ onSubmitHandler }) => (
   <ContactsForm onSubmit={onSubmitHandler}>
@@ -28,3 +29,7 @@ export const ContactForm = ({ onSubmitHandler }) => (
     <ContactFormBtn>Add contact</ContactFormBtn>
   </ContactsForm>
 );
+
+ContactForm.propTypes = {
+  onSubmitHandler: propTypes.func.isRequired,
+};

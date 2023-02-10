@@ -4,6 +4,7 @@ import {
   ContactFormText,
   ContactFormDeleteBtn,
 } from './ContactList.styled';
+import propTypes from 'prop-types';
 
 export const ContactList = ({ contacts, removeHandler }) => (
   <ContactFormList>
@@ -23,3 +24,8 @@ export const ContactList = ({ contacts, removeHandler }) => (
     ))}
   </ContactFormList>
 );
+
+ContactList.propTypes = {
+  contacts: propTypes.arrayOf(propTypes.string).isRequired,
+  removeHandler: propTypes.func.isRequired,
+};
