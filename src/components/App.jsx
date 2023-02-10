@@ -24,25 +24,22 @@ export class App extends Component {
     e.preventDefault();
 
     const { name, number } = e.target.elements;
+    const newName = e.target.elements.name.value;
+    const contactsList = [...this.state.contacts];
+    const newContact = {
+      id: nanoid(),
+      name: name.value,
+      number: number.value,
+    };
 
-    this.setState(({ contacts }) => {
-      const newName = e.target.elements.name.value;
-      const contactsList = [...this.state.contacts];
+    if (contactsList.find(contact => newName === contact.name)) {
+      alert(`${newName} is already in contacts.`);
+      return;
+    } else {
+      contactsList.push({ ...newContact });
+    }
 
-      if (contactsList.find(contact => newName === contact.name)) {
-        alert(`${newName} is already in contacts.`);
-        return;
-      } else {
-        const newContact = {
-          id: nanoid(),
-          name: name.value,
-          number: number.value,
-        };
-        return {
-          contacts: [...contacts, newContact],
-        };
-      }
-    });
+    this.setState({ contacts: contactsList });
   };
 
   removeContactItem = id => {
@@ -57,12 +54,13 @@ export class App extends Component {
     });
   };
 
-  getFilterContactsName = () =>
-    this.state.contacts.filter(contact => {
+  getFilterContactsName = () => {
+    return this.state.contacts.filter(contact => {
       return contact.name
         .toLowerCase()
         .includes(this.state.filter.toLocaleLowerCase());
     });
+  };
 
   render() {
     return (
