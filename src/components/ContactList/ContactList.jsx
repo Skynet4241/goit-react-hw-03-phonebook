@@ -26,6 +26,12 @@ export const ContactList = ({ contacts, removeHandler }) => (
 );
 
 ContactList.propTypes = {
-  contacts: propTypes.arrayOf(propTypes.string).isRequired,
+  contacts: propTypes.arrayOf(
+    propTypes.exact({
+      id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired,
+      number: propTypes.string.isRequired,
+    })
+  ),
   removeHandler: propTypes.func.isRequired,
 };
